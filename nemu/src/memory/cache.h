@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 #define l1_OFFSET_WIDTH 6	//2^6=64B
-#define l1_INDEX_WIDTH 9	//16-6-3=7	2^3=8 way
+#define l1_INDEX_WIDTH 7	//16-6-3=7	2^3=8 way
 #define l1_TAG_WIDTH (32-l1_OFFSET_WIDTH-l1_INDEX_WIDTH)
 // 32-(n+m)
 #define l2_OFFSET_WIDTH 6
