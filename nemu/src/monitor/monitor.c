@@ -10,6 +10,8 @@ void load_elf_tables(int, char *[]);
 void init_regex();
 void init_wp_pool();
 void init_ddr3();
+void cache_init_l1();
+void cache_init_l2();
 
 FILE *log_fp = NULL;
 
@@ -76,6 +78,8 @@ static void load_entry() {
 
 void restart() {
 	/* Perform some initialization to restart a program */
+	cache_init_l1();
+	cache_init_l2();
 #ifdef USE_RAMDISK
 	/* Read the file with name `argv[1]' into ramdisk. */
 	init_ramdisk();
@@ -87,7 +91,7 @@ void restart() {
 	/* Set the initial instruction pointer. */
 	cpu.eip = ENTRY_START;
         cpu.eflags.val = 0x2;
-
+	
 	/* Initialize DRAM. */
 	init_ddr3();
 }
