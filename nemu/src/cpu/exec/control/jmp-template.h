@@ -1,4 +1,4 @@
-#include "cpu/exec/template-start.h"
+/*#include "cpu/exec/template-start.h"
 
 #define instr jmp
 
@@ -17,9 +17,9 @@ make_helper(jmp_rm_l) {
 }
 #endif
 
-#include "cpu/exec/template-end.h"
+#include "cpu/exec/template-end.h"*/
 
-/*#include "cpu/exec/template-start.h"
+#include "cpu/exec/template-start.h"
 
 #define instr jmp
 
@@ -56,4 +56,4 @@ make_helper(concat(jmp_inter_, SUFFIX)){
 make_instr_helper(i)
 make_instr_helper(rm)
 
-#include "cpu/exec/template-end.h"*/
+#include "cpu/exec/template-end.h"
