@@ -2,17 +2,28 @@
 #define __REG_H__
 
 #include "common.h"
+#include "../../../lib-common/x86-inc/cpu.h"
+#include "../../../lib-common/x86-inc/mmu.h"
 
 enum { R_EAX, R_ECX, R_EDX, R_EBX, R_ESP, R_EBP, R_ESI, R_EDI };
 enum { R_AX, R_CX, R_DX, R_BX, R_SP, R_BP, R_SI, R_DI };
 enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
-
+enum { S_ES, S_CS, S_SS, S_DS};
 /* TODO: Re-organize the `CPU_state' structure to match the register
  * encoding scheme in i386 instruction format. For example, if we
  * access cpu.gpr[3]._16, we will get the `bx' register; if we access
  * cpu.gpr[1]._8[1], we will get the 'ch' register. Hint: Use `union'.
  * For more details about the register encoding scheme, see i386 manual.
  */
+
+typedef union{
+	struct{
+		unsigned RPL:2;
+		unsigned TI:1;
+		unsigned INDEX:13;
+	};
+	uint16_t val;
+} R_segment;
 
 typedef struct {
      union{
@@ -48,10 +59,27 @@ typedef struct {
 			uint32_t IOPL	:2;
 			uint32_t NT		:1;
 			uint32_t pad3	:1;
-			uint16_t pad4;
+			uint32_t RF     :1;
+			uint32_t VM     :1;
+			uint32_t pad4   :14;
 		};
 		uint32_t val;
 	} eflags;
+
+	struct{
+		uint16_t limit;
+		uint32_t base;
+	} GDTR;
+	struct{
+		uint16_t limit;
+		uint32_t base;
+	} IDTR;
+
+	CR0 cr0;
+	CR3 cr3;
+	R_segment seg_r[4];
+	SegDesc seg_c[4];	
+	bool INTR;
 
 } CPU_state;
 

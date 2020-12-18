@@ -1,6 +1,7 @@
 #include "prefix/prefix.h"
 
 #include "data-mov/mov.h"
+#include "data-mov/movcr.h"
 #include "data-mov/xchg.h"
 #include "data-mov/push.h"
 #include "data-mov/pop.h"
@@ -36,6 +37,8 @@
 #include "control/ret.h"
 #include "control/jcc.h"
 #include "control/jmp.h"
+#include "control/lgdt.h"
+#include "control/mov_s.h"
 
 #include "string/rep.h"
 #include "string/movs.h"

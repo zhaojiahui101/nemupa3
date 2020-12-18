@@ -78,6 +78,27 @@ static void load_entry() {
 
 void restart() {
 	/* Perform some initialization to restart a program */
+	cpu.eflags.pad0=1;
+	cpu.eflags.pad1=0;
+	cpu.eflags.pad2=0;
+	cpu.eflags.pad3=0;
+	cpu.eflags.pad4=0;
+	cpu.eflags.CF=0;
+	cpu.eflags.PF=0;
+	cpu.eflags.AF=0;
+	cpu.eflags.ZF=0;
+	cpu.eflags.SF=0;
+	cpu.eflags.TF=0;
+	cpu.eflags.IF=0;
+	cpu.eflags.DF=0;
+	cpu.eflags.OF=0;
+	cpu.eflags.IOPL=0;
+	cpu.eflags.NT=0;
+	cpu.eflags.RF=0;
+	cpu.eflags.VM=0;
+	cpu.INTR=0;
+	cpu.cr0.val=0x0;
+	cpu.cr3.val=0x0;
 	cache_init_l1();
 	cache_init_l2();
 #ifdef USE_RAMDISK
